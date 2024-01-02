@@ -66,4 +66,43 @@ delete from `회원 테이블(tb1user)` where `user_id` = 'p105';
 insert into `회원 테이블(tb1user)` set `user_id`='p105', `user_name`='이순신', `user_hp`='010-1234-1005', `user_age`='50';
 
 
+
+create table `제품 테이블(Tb1product)` (
+`prod_no` int,
+`prod_name` varchar(10),
+`prod_price` int,
+`Prod_stock` int,
+`prod_complany` varchar(10),
+`prod_date` date
+);
+
+insert into `제품 테이블(Tb1product)` values ('1001','냉장고', '800000','25','LG전자','2022-01-06');
+insert into `제품 테이블(Tb1product)` values ('1002','노트북','1200000','120','삼성전자','2022-01-07');
+insert into `제품 테이블(Tb1product)` values ('1003','모니터','350000','35','LG전자','2023-01-01');
+insert into `제품 테이블(Tb1product)` values ('1004','세탁기','1000000','80','삼성전자','2021-01-01');
+insert into `제품 테이블(Tb1product)` values ('1005','컴퓨터','1500000','20','삼성전자','2023-10-01');
+insert into `제품 테이블(Tb1product)` set `prod_no`='1006', `prod_name`='휴대폰', `prod_price`='950000', `prod_stock`='102';
+
+
 #실습 2-9
+select * from `회원 테이블(tb1user)`;
+select `user_name` from `회원 테이블(tb1user)`;
+select `user_name`, `user_hp` from `회원 테이블(tb1user))`;
+select * from `회원 테이블(tb1user)` where `user_id`='p102';
+select * from `회원 테이블(tb1user)` where `user_id`='p104' or `user_id` = 'p105';
+select * from `회원 테이블(tb1user)` where `user_addr` = '부산시 금정구'; 
+select * from `회원 테이블(tb1user)` where `user_age` > 30 ; 
+select * from `회원 테이블(tb1user)` where `user_hp` is null ;
+update `회원 테이블(tb1user)` set `user_age`=42 where `user_id` = 'p104'; 
+update `회원 테이블(tb1user)` set `user_addr`='부산시 진구' where `user_id` = 'p105'; 
+delete from `회원 테이블(tb1user)` where `user_id` = 'p103';
+
+select * from  `제품 테이블(Tb1product)`;
+select `prod_name` from  `제품 테이블(Tb1product)`;
+select `prod_name`, `prod_complany`, `prod_price` from  `제품 테이블(Tb1product)`;
+select * from  `제품 테이블(Tb1product)` where `prod_complany`='삼성전자';
+update  `제품 테이블(Tb1product)` set
+									`prod_complany`='삼성전자',
+									`prod_date`='2024-01-01'
+                                    where
+                                    `prod_no`='1006';
