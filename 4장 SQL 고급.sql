@@ -94,17 +94,139 @@ insert into `Department` values (107,'인사부','051-512-1007');
 
 
 #실습 4-3
+SELECT * from `member` where `name` = '김유신';
+select * from `member` where `pos` = '차장' and dep=101;
+select * from `member` where `pos` = '차장' or dep=101;
+select * from `member` where `name` != '김춘추';
+select * from `member` where `pos` in ('사원','대리');
+select * from `member` where `name` like '%신';
+select * from `member` where `name` like '정_';
+select * from `member` where `name` <> '김춘추';
+select * from `member` where `name` like '김%';
+select * from `Sales` where `sale` > 50000;
+select * from `Sales` where `sale` between 50000 and 100000;
+select * from `sales` where `year` in(2020);
+select * from `sales` where `month` in(1,2);
+select * from `sales` where `sale` not between 50000 and 100000;
+
+
 #실습 4-4
+select * from `sales` order by `sale` asc;
+select * from `sales` order by `sale` desc;
+select * from `member` order by `name` desc;
+select * from `sales` 
+		where `sale` > 50000
+        order by `year`, `month`, `sale` desc;
+
 #실습 4-5
+select * from sales;
+select * from sales limit 3;
+select * from sales limit 0, 3;
+select * from sales limit 1, 2;
+select * from sales order by `sale` desc limit 3, 5;
+select * from sales where `sale` < 50000 order by `sale` desc limit 3;
+
 #실습 4-6
+select * from `sales`;
+select SUM(`sale`) from `sales`;
+select sum(`sale`) as `합계` from `sales`;
+select ceiling(1.2);
+select ceiling(1.8);
+select floor(1.8);
+select round(1.5);
+select rand();
+select ceil(1.2);
+select ceil(rand()*10);
+select count(*) as `갯수` from `sales`; # * =>기본키 컬럼을 가지고 카운팅함
+select count(sale) as `갯수` from `sales`;
+select left('Helloworld', 5);
+select right('Helloworld', 5);
+select substring('Helloworld', 6, 5);
+select concat(`uid`,`name`,`hp`) from `member` where `uid`='a108';
+select curdate();
+select curtime();
+select now();
+insert into `member` values ('a112','유관순','010-1234-1012','대리',107,now());
+select * from `member`;
+
+
+
 #실습 4-7
 #실습 4-8
 #실습 4-9
 #실습 4-10
+select * from `sales` group by `uid`;
+select `uid`, count(*) from `sales` group by `uid`;
+select `uid`, sum(sale) as `합계` from `sales` group by `uid`;
+select `uid`,`year`, sum(sale) as `합계` from `sales` group by `uid`,`year`;
+select `uid`,`year`, sum(sale) as `합계` from `sales` group by `uid`,`year` order by `year` asc, `합계` desc;
+
 #실습 4-11
+select `uid`, sum(sale) as `합계` from `sales` 
+		group by `uid` 
+        having `합계` >= 200000;
+        
+select `uid`, `year`, sum(sale) as `합계` 
+		from `sales` 
+        where `sale` >= 100000
+        group by `uid`, `year` 
+		having `합계` >= 200000
+        order by `합계` desc;
 #실습 4-12
+create table `sales2` like `sales`;
+insert into `sales2` select * from `sales`;
+update `sales2` set `year` =  `year` + 3;
+
+select * from `sales` union select * from `sales2`;
+select * from `sales` where `sale` >= 100000
+union
+select * from `sales2` where `sale` >=100000;
+
+select `uid`,`year`,`sale` from sales
+union
+select `uid`,`year`,`sale` from sales2;
+
+select `uid`,`year`, sum(sale) as `합계`
+from `sales`
+group by `uid`,`year`
+union
+select `uid`,`year`, sum(sale) as `합계`
+from `sales2`
+group by `uid`,`year`
+order by `year` asc, `합계` desc;
+
+
+
 #실습 4-13
+select * from `sales` inner join `member` on `sales` .`uid` = `member` .`uid`;
+select * from `sales` as a join `member` as b on a.uid = b.uid;
+select * from `sales` as a, `member` as b where a.uid = b.uid;
+select
+	a.uid,
+    a.year,
+    a.month,
+    a.sale,
+    b.name,
+    b.hp,
+    c.name
+from `sales` as a
+join `member` as b on a.uid = b.uid
+join `department` as c on  b.dep = c.depNo;    
+
+
+
+
+
+
 #실습 4-14
+insert into `sales` (`uid`,`year`, `month`, `sale`) values ('p101', 2020, 2,  13000);
+select * from `sales` as a inner join `member` as b on a.uid = b.uid;
+select * from `sales` as a left join `member` as b on a.uid = b.uid;
+select * from `sales` as a right join `member` as b on a.uid = b.uid;
+select * from `sales`;
+
 #실습 4-15
 #실습 4-16
 #실습 4-17
+
+
